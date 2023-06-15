@@ -11,8 +11,14 @@ body{
 }
 
 nav{
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Varela Round', sans-serif;
     font-size: large;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100px;
+    background-color: black;
+    color: white;
 }
 
 nav ul{
@@ -20,21 +26,44 @@ nav ul{
     align-items: center;
     list-style-type: none;
     height: 65px;
-    background-color: black;
+    margin-right: 2%;
     color: white;
 }
 
-nav ul li{
-    padding: 0 12px;
-}
-.brand img{
-    width: 44px;
-    padding: 0 8px;
+nav ul li a{
+    margin: 4px;
+    padding: 4px 12px;
+    color: white;
+    text-decoration: none;
+    transition: 0.8s ease;
+    border: 2px transparent;
+    border-radius: 5px;
 }
 
+nav ul li a:hover{
+    background-color: white;
+    color: black;
+}
+
+nav ul li.active a{
+    background-color: white;
+    color: black;
+}
+.brand img{
+    margin-left: 10px;
+    width: 240px;
+    height: 80px;
+    padding: 0 8px;
+    border-radius: 20px;
+}
+
+.brand img :hover{
+    cursor: pointer;
+}
 .brand {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     font-weight: bolder;
     font-size: 2.0rem;
 }
@@ -51,6 +80,14 @@ nav ul li{
    padding: 34px;
    background-image: url('bg7.jpg');
    background-position: right -181.5px bottom -6px ;
+}
+
+.trending{
+    text-shadow: 2.5px 2.5px black;
+}
+
+.trending :hover{
+    cursor: pointer;
 }
 
 .bottom{
@@ -78,7 +115,7 @@ nav ul li{
 }
 
 .songItemContainer{
-    margin-top: 74px;
+    margin-top: 25px;
 }
 
 .songItem{
@@ -91,8 +128,18 @@ nav ul li{
     justify-content: space-between;
     align-items: center;
     border-radius: 34px;
+    border-width: 10px;
+    border: 2px solid black;
 }
 
+.songItem:hover{
+    cursor: pointer;
+    /* background-color: black;
+    color: white; */
+    transform: scale(1.05);
+}
+
+ 
 .songItem img{
     width: 43px;
     margin: 0 23px;
@@ -120,6 +167,6 @@ nav ul li{
 
 @media only screen and (max-width: 1100px) {
     body {
-      background-color: red;
+      background-color: antiquewhite;
     }
   }

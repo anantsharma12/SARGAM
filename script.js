@@ -8,7 +8,7 @@ let myProgressBar = document.getElementById('myProgressBar');
 let gif = document.getElementById('gif');
 let masterSongName = document.getElementById('masterSongName');
 let songItems = Array.from(document.getElementsByClassName('songItem'));
-
+let count =0;
 let songs = [
     {songName: "Baari - Bilal Saeed", filePath: "songs/1.mp3", coverPath: "covers/1.jpg"},
     {songName: "Pasoori - CokeStudio", filePath: "songs/2.mp3", coverPath: "covers/2.jpg"},
@@ -25,16 +25,56 @@ let songs = [
 songItems.forEach((element, i)=>{ 
     element.getElementsByTagName("img")[0].src = songs[i].coverPath; 
     element.getElementsByClassName("songName")[0].innerText = songs[i].songName; 
+    element.addEventListener('click' , ()=>{
+        songIndex=i;
+        audioElement.src = `songs/${songIndex+1}.mp3`;
+        masterSongName.innerText = songs[songIndex].songName;
+        audioElement.currentTime = 0;
+        audioElement.play();
+        gif.style.opacity = 1;
+        masterPlay.classList.remove('fa-play-circle');
+        masterPlay.classList.add('fa-pause-circle');
+        element.style.backgroundColor= 'black';
+        element.style.color='white';
+        element.style.transform='scale(1.05)'
+        element.style.border='solid white';
+        makeAllNormal(songIndex);
+        //makeOnePause(songIndex);
+    }) 
 })
  
+// const makeOnePause=(songIndex)=>{
+//     let player=songItems[songIndex].getElementsByClassName("songItemPlay");
+//     player.classList.remove('fa-play-circle');
+// }
+
+const makeAllNormal= (songIndex)=>{
+    songItems.forEach((element, i)=>{ 
+        if (i!=songIndex){
+            element.style.backgroundColor= 'white';
+            element.style.color='black';
+            element.style.transform='scale(1.00)';
+            element.style.border='solid black';
+            element.addEventListener('mouseover', ()=>{
+                element.style.transform='scale(1.05)';
+            })
+            element.addEventListener('mouseout', ()=>{
+                if (element.style.backgroundColor=='white')
+                element.style.transform='scale(1.00)';
+            })
+        }
+    })
+}
 
 // Handle play/pause click
+
 masterPlay.addEventListener('click', ()=>{
     if(audioElement.paused || audioElement.currentTime<=0){
         audioElement.play();
         masterPlay.classList.remove('fa-play-circle');
         masterPlay.classList.add('fa-pause-circle');
         gif.style.opacity = 1;
+        makeAllPlays();
     }
     else{
         audioElement.pause();
@@ -65,6 +105,7 @@ Array.from(document.getElementsByClassName('songItemPlay')).forEach((element)=>{
     element.addEventListener('click', (e)=>{ 
         makeAllPlays();
         songIndex = parseInt(e.target.id);
+        console.log(e.classList);
         e.target.classList.remove('fa-play-circle');
         e.target.classList.add('fa-pause-circle');
         audioElement.src = `songs/${songIndex+1}.mp3`;
@@ -90,6 +131,11 @@ document.getElementById('next').addEventListener('click', ()=>{
     audioElement.play();
     masterPlay.classList.remove('fa-play-circle');
     masterPlay.classList.add('fa-pause-circle');
+        songItems[songIndex].style.backgroundColor= 'black';
+        songItems[songIndex].style.color='white';
+        songItems[songIndex].style.transform='scale(1.05)';
+        songItems[songIndex].style.border='solid white';
+        makeAllNormal(songIndex);
 
 })
 
@@ -106,4 +152,9 @@ document.getElementById('previous').addEventListener('click', ()=>{
     audioElement.play();
     masterPlay.classList.remove('fa-play-circle');
     masterPlay.classList.add('fa-pause-circle');
+    songItems[songIndex].style.backgroundColor= 'black';
+        songItems[songIndex].style.color='white';
+        songItems[songIndex].style.transform='scale(1.05)';
+        songItems[songIndex].style.border='solid white';
+        makeAllNormal(songIndex);
 })
